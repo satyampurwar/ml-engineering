@@ -241,3 +241,27 @@ To facilitate deployment, Docker images are created by aggregating necessary art
 - Create `.dockerignore` file to ignore copying files in WORKDIR of image/container.
 
 - Construct Dockerfile to package all components into a Docker image, ensuring efficient deployment and scalability.
+
+3. **Image Development:**
+   
+```bash 
+cd deploy/docker 
+```
+   
+- **Build With Root User:**
+   
+```bash 
+docker build . -t <dockerhub_username>/mle:rootuser -f Dockerfile.rootuser 
+```
+   
+- **Build Without Root User for Security:** Enhance security by building an image that does not use the root user.
+   
+```bash 
+docker build . -t <dockerhub_username>/mle:nonrootuser -f Dockerfile.nonrootuser 
+```
+   
+- **Use Buildkit for Multistage Builds:** Optimize your image size and build time using Docker Buildkit for multistage builds.
+   
+```bash 
+DOCKER_BUILDKIT=1 docker build . -t <dockerhub_username>/mle:multistage -f Dockerfile.multistage 
+```
