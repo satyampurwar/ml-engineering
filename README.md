@@ -101,3 +101,67 @@ Run tests:
 pytest
 pytest <test_directory>/<test.py>
 ```
+
+## Documentation
+
+Using Sphinx for documentation generation.
+
+### Prerequisites
+
+1. Install the package:
+   - Option 1: Editable mode (dependent on pyproject.toml): produces egg-info folder.
+     ```bash
+     pip install -e .
+     ```
+   - Option 2: Build and install: produces egg-info folder as well as dist folder containing tar.gz and whl file.
+     ```bash
+     python3 -m pip install --upgrade build
+     python3 -m build
+     pip install dist/housing_value-0.0.0-py3-none-any.whl
+     ```
+
+2. Install Sphinx:
+   ```bash
+   sudo apt install python3-sphinx
+   ```
+
+### Generating Documentation
+
+1. Navigate to the docs directory:
+   ```bash
+   cd docs
+   ```
+
+2. Check configuration files:
+   - Make sure to create Makefile.
+
+3. Generate Sphinx project:
+   ```bash
+   sphinx-quickstart
+   ```
+
+4. Update configuration files:
+   - Modify `source/conf.py` and `source/index.rst` as needed.
+   - Reference files are available in the `reference` directory.
+
+5. Generate API documentation:
+   ```bash
+   sphinx-apidoc -o ./source ../src/housing_value
+   ```
+
+6. Update configuration files:
+   - Modify `source/housing_value.rst` as needed.
+   - Reference files are available in the `reference` directory.
+
+7. Build HTML documentation:
+   ```bash
+   make clean
+   make html
+   ```
+
+8. Return to the project root:
+   ```bash
+   cd ..
+   ```
+
+**Note:** The documentation file hierarchy in the `source` directory is: `index.rst > modules.rst > housing_value.rst`.
