@@ -327,3 +327,21 @@ docker rm -f <container_name>
 ```bash 
 docker rmi <image_name> 
 ```
+
+### Retesting in a New Environment
+
+To test your application in a new environment:
+
+1. **Pull Image from Docker Hub:**
+   
+```bash 
+docker pull <dockerhub_username>/mle:rootuser 
+```
+
+2. **Start the Container Again:**
+   
+```bash 
+docker run -dit -p 8080:5000 --name rootuser <dockerhub_username>/mle:rootuser 
+```
+
+3. **Re-test the Endpoint:** Use the same curl command as before to verify functionality.
