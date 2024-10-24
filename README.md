@@ -29,3 +29,23 @@ This repository contains the code and documentation for developing and deploying
 
 - Reference code: `<base>/ml-engineering/reference/nonstandardcode`
 - Working notebooks: `<base>/ml-engineering/notebooks/working`
+
+### Script Development
+
+Scripts are derived from working notebooks in `<base>/ml-engineering/notebooks/working`.
+
+### Setting PYTHONPATH
+
+Ensure the directory containing `housing_value` is in PYTHONPATH:
+```bash
+conda env config vars set PYTHONPATH=$(pwd)/src
+conda deactivate
+conda activate mle
+echo $PYTHONPATH
+```
+
+### Integrated Features in Scripts
+
+- Argument Parsing: Uses `argparse` for command-line arguments.
+- Configuration Management: Implements `configparser` with `setup.cfg`.
+- Logging: Incorporates `logging` for execution tracking and debugging.
