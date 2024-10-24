@@ -276,3 +276,9 @@ This section provides detailed instructions for containerizing your application 
 ```bash 
 docker run -dit -p 8080:5000 --name rootuser <dockerhub_username>/mle:rootuser 
 ```
+
+2. **Test the Endpoint:** Verify that your application is running correctly by sending a POST request to the endpoint using curl.
+   
+```bash 
+curl -X POST -H "Content-Type: application/json" --data '{"dataframe_split": {"columns": ["longitude", "latitude", "housing_median_age", "total_rooms", "total_bedrooms", "population", "households", "median_income", "ocean_proximity"], "data": [[-118.39, 34.12, 29.0, 6447.0, 1012.0, 2184.0, 960.0, 8.2816, "<1H OCEAN"]]}}' http://127.0.0.1:8080/invocations 
+```
