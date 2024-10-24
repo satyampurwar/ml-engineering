@@ -200,3 +200,20 @@ The optional parameter `split_size` defaults to `0.2`.
    ```bash
    pip install virtualenv
    ```
+
+7. **API Endpoint Generation**: Create an API endpoint to serve the model using -
+   ```bash
+   mlflow models serve -m mlruns/<experiment_id>/<run_id>/artifacts/model/ -h 127.0.0.1 -p 1234
+   ```
+
+8. **Testing API Endpoint**: Test the API endpoint from another terminal with the following formats.
+
+- **Datasplit Format**:
+  ```bash
+  curl -X POST -H "Content-Type: application/json" --data '{"dataframe_split": {"columns": ["longitude", "latitude", "housing_median_age", "total_rooms", "total_bedrooms", "population", "households", "median_income", "ocean_proximity"], "data": [[-118.39, 34.12, 29.0, 6447.0, 1012.0, 2184.0, 960.0, 8.2816, "<1H OCEAN"]]}}' http://127.0.0.1:1234/invocations 
+  ```
+
+- **Inputs/Instances Format**:
+  ```bash 
+  curl -X POST -H "Content-Type: application/json" --data '{"inputs": [{"longitude": -118.39, "latitude": 34.12, "housing_median_age": 29.0, "total_rooms": 6447.0, "total_bedrooms": 1012.0, "population": 2184.0, "households": 960.0, "median_income": 8.2816, "ocean_proximity": "<1H OCEAN"}]}' http://127.0.0.1:1234/invocations 
+  ```
