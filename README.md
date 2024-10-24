@@ -71,3 +71,12 @@ sudo apt install black isort flake8
 chmod +x shell/src_quality.sh
 ./shell/src_quality.sh
 ```
+
+### Script Execution
+
+View available options for each script using the `--help` flag:
+```bash
+python src/housing_value/ingest_data.py --help
+python src/housing_value/train.py --help
+python src/housing_value/score.py --help
+```
