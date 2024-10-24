@@ -22,3 +22,10 @@ This repository contains the code and documentation for developing and deploying
   - Update environment file: `conda env export --name mle > deploy/conda/linux_py312.yml`
   - Deactivate environment: `conda deactivate`
   - Remove environment (if necessary): `conda remove --name mle --all`
+
+## Development Workflow
+
+### Research & Development
+
+- Reference code: `<base>/ml-engineering/reference/nonstandardcode`
+- Working notebooks: `<base>/ml-engineering/notebooks/working`
