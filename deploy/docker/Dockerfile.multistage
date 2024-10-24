@@ -1,0 +1,58 @@
+# Builder Stage 
+# Base Image
+FROM python:3.12.7-slim-bullseye AS builder
+
+# Creating a virtual environment and setting PATH
+RUN python -m venv /opt/venv
+ENV PATH="/opt/venv/bin:$PATH"
+
+# Making directory for application artifacts
+RUN mkdir -p /opt/app
+WORKDIR /opt/app
+
+# Copying application files
+COPY . .
+
+# Installing system dependencies first
+RUN apt-get update && \
+    apt-get install -y --no-install-recommends gcc python3-dev && \
+    apt-get clean && \
+    rm -rf /var/lib/apt/lists/*
+
+# Installing dependencies and cleaning up
+RUN pip install --no-cache-dir --upgrade pip && \
+    pip install --no-cache-dir -r requirements.txt && \
+    pip install --no-cache-dir housing_value-0.0.0-py3-none-any.whl && \
+    rm housing_value-0.0.0-py3-none-any.whl requirements.txt
+
+# Runtime Stage
+FROM python:3.12.7-slim-bullseye AS runtime
+
+# Copy binaries and artifacts from builder image
+COPY --from=builder /opt /opt
+
+# Creating a virtual environment and setting PATH
+RUN python -m venv /opt/venv
+ENV PATH="/opt/venv/bin:$PATH"
+
+# Labelling & Environment Variables
+LABEL maintainer="Satyam Purwar"
+ENV SERVER_HOST=0.0.0.0
+ENV ARTIFACTS_STORE=/opt/app/mlruns/
+
+# Pointer at this directory
+WORKDIR /opt/app
+
+# Creating a non-root user
+RUN useradd -m appuser
+
+# Change ownership of the application directory to the non-root user
+RUN chown -R appuser:appuser /opt/app /opt/venv
+
+# Switch to non-root user
+USER appuser
+
+# Execution
+RUN chmod +x /opt/app/run.sh
+ENTRYPOINT ["/usr/bin/env"]
+CMD ["bash", "/opt/app/run.sh"]
