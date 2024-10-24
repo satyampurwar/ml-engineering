@@ -282,3 +282,48 @@ docker run -dit -p 8080:5000 --name rootuser <dockerhub_username>/mle:rootuser
 ```bash 
 curl -X POST -H "Content-Type: application/json" --data '{"dataframe_split": {"columns": ["longitude", "latitude", "housing_median_age", "total_rooms", "total_bedrooms", "population", "households", "median_income", "ocean_proximity"], "data": [[-118.39, 34.12, 29.0, 6447.0, 1012.0, 2184.0, 960.0, 8.2816, "<1H OCEAN"]]}}' http://127.0.0.1:8080/invocations 
 ```
+
+### Managing Docker Images
+
+1. **Push Image to Docker Hub:** First, log in to Docker Hub and then push images.
+   
+```bash 
+docker login -u <dockerhub_username>
+docker push <dockerhub_username>/mle:rootuser 
+docker push <dockerhub_username>/mle:nonrootuser 
+docker push <dockerhub_username>/mle:multistage 
+```
+
+2. **List Images and Containers:** To view all Docker images and containers on system.
+   
+- **Images:** 
+
+```bash 
+docker image ls 
+```
+   
+- **Containers:** 
+
+```bash 
+docker ps --all 
+```
+
+3. **View Logs:** Access the logs of a running container.
+   
+```bash 
+docker logs <container_name> 
+```
+
+4. **Delete Containers and Images:** Remove a specific container or image using these commands:
+
+- **Containers:** 
+
+```bash 
+docker rm -f <container_name> 
+```
+  
+- **Images:** 
+
+```bash 
+docker rmi <image_name> 
+```
