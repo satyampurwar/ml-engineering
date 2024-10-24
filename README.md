@@ -80,3 +80,24 @@ python src/housing_value/ingest_data.py --help
 python src/housing_value/train.py --help
 python src/housing_value/score.py --help
 ```
+
+## Testing 
+
+Install pytest:
+```bash
+sudo apt install python3-pytest
+```
+
+**Note:** Configurations are specified in `setup.cfg`.
+
+Maintain test code quality:
+```bash
+chmod +x shell/tests_quality.sh
+./shell/tests_quality.sh
+```
+
+Run tests:
+```bash
+pytest
+pytest <test_directory>/<test.py>
+```
