@@ -265,3 +265,14 @@ docker build . -t <dockerhub_username>/mle:nonrootuser -f Dockerfile.nonrootuser
 ```bash 
 DOCKER_BUILDKIT=1 docker build . -t <dockerhub_username>/mle:multistage -f Dockerfile.multistage 
 ```
+## Container Management
+
+This section provides detailed instructions for containerizing your application using Docker and testing endpoints.
+
+### Starting and Testing a Container
+
+1. **Start the Container:** Use the following command to start a Docker container named `rootuser` and map port 8080 on your host to port 5000 in the container.
+   
+```bash 
+docker run -dit -p 8080:5000 --name rootuser <dockerhub_username>/mle:rootuser 
+```
