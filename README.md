@@ -49,3 +49,25 @@ echo $PYTHONPATH
 - Argument Parsing: Uses `argparse` for command-line arguments.
 - Configuration Management: Implements `configparser` with `setup.cfg`.
 - Logging: Incorporates `logging` for execution tracking and debugging.
+
+### Code Quality Tools
+
+Install required tools:
+```bash
+sudo apt install black isort flake8
+```
+
+| Tool   | Description     | Usage             |
+|--------|-----------------|-------------------|
+| Black  | Code formatter  | `black <script.py>` |
+| isort  | Import sorter   | `isort <script.py>` |
+| flake8 | Linter          | `flake8 <script.py>` |
+
+**Note:** Configurations are specified in `setup.cfg` and `.vscode/settings.json` (for VS Code users).
+
+### Maintaining Code Quality
+
+```bash
+chmod +x shell/src_quality.sh
+./shell/src_quality.sh
+```
