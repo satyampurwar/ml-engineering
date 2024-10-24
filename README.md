@@ -217,3 +217,27 @@ The optional parameter `split_size` defaults to `0.2`.
   ```bash 
   curl -X POST -H "Content-Type: application/json" --data '{"inputs": [{"longitude": -118.39, "latitude": 34.12, "housing_median_age": 29.0, "total_rooms": 6447.0, "total_bedrooms": 1012.0, "population": 2184.0, "households": 960.0, "median_income": 8.2816, "ocean_proximity": "<1H OCEAN"}]}' http://127.0.0.1:1234/invocations 
   ```
+
+## Dockerization
+
+### Deployment Readiness
+
+To facilitate deployment, Docker images are created by aggregating necessary artifacts and configurations.
+
+1. **Artifact Aggregation:** 
+
+- Copy model artifacts (`MLmodel` and `model.pkl`) from `mlruns/<experiment_id>/<run_id>/artifacts/model` to `<base>/ml-engineering/deploy/docker/mlruns`. Ensure unnecessary metadata is cleaned from the `MLmodel`.
+
+- Transfer the `requirements.txt` file from `mlruns/<experiment_id>/<run_id>/artifacts/model` to `<base>/ml-engineering/deploy/docker`.
+
+- Move the wheel file (`housing_value-0.0.0-py3-none-any.whl`) from the dist directory to `<base>/ml-engineering/deploy/docker`.
+
+- Copy the `setup.cfg` from the project root to `<base>/ml-engineering/deploy/docker`, ensuring it contains only data required for inference.
+
+2. **Script and Configuration Creation:**
+
+- Develop script `run.sh` to execute MLflow models serve command.
+
+- Create `.dockerignore` file to ignore copying files in WORKDIR of image/container.
+
+- Construct Dockerfile to package all components into a Docker image, ensuring efficient deployment and scalability.
