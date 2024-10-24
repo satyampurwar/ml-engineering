@@ -187,3 +187,16 @@ Using Sphinx for documentation generation.
    ```
    
 The optional parameter `split_size` defaults to `0.2`.
+
+4. **Python Version Management**: Install `pyenv` for managing Python versions and ensuring reproducibility, which facilitates selecting a specific Python version for the project.
+   ```bash
+   chmod +x shell/pyenv.sh
+   ./shell/pyenv.sh
+   ```
+
+5. **Activate Conda Environment**: Activate the conda environment created during the experiment execution.
+
+6. **Dependency Installation**: Install the required dependency in activated environment.
+   ```bash
+   pip install virtualenv
+   ```
